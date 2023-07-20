@@ -5,14 +5,14 @@ const knex = require("../database/knex");
 
 class UsersController {
 
-        async create({ name, email, password }) {
-            const userId = await knex("users").insert({
-              name,
-              email,
-              password
-          });
+    async create({ name, email, password }) {
+        const userId = await knex('users').insert({
+          name,
+          email,
+          password,
+        });
 
-        return response.status(201).json();
+         return { id: userId };
     }
 
     async update(request, response) {
