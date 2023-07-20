@@ -1,17 +1,12 @@
-const { Router} = require("express");
-const multer = require("multer");
-const uploadConfig = require("../configs/upload");
+const { Router } = require("express")
 
-const UsersController = require("../controllers/UsersController");
-const ensureAuthenticated = require("../middlewares/ensureAuthenticated");
+const UsersController = require("../controllers/UsersController")
 
-const usersRoutes = Router();
-const upload = multer(uploadConfig.MULTER);
+const usersRouter = Router()
 
+const usersController = new UsersController()
 
-const usersController = new UsersController();
+usersRouter.post("/", usersController.create)
+usersRouter.put("/:id", usersController.update)
 
-usersRoutes.post("/", usersController.create);
-usersRoutes.put("/", ensureAuthenticated, usersController.update);
-
-module.exports = usersRoutes;
+module.exports = usersRouter;
