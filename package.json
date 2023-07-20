@@ -9,7 +9,7 @@
     "migrate": "knex migrate:latest"
   },
   "keywords": [],
-  "author": "",
+  "author": "Gabriel Russo Grilo",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.0",
