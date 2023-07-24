@@ -54,8 +54,8 @@ class UsersController {
     }
 
     if (currentPassword && newPassword) {
-      const validadePassword = await compare(currentPassword, user.password);
-      if (!validadePassword) {
+      const validatePassword = await compare(currentPassword, user.password);
+      if (!validatePassword) {
         throw new AppError('A senha atual não confere.');
       }
 
@@ -81,8 +81,8 @@ class UsersController {
       throw new AppError('Usuário não encontrado.');
     }
 
-    const validadePassword = await compare(password, user.password);
-    if (!validadePassword) {
+    const validatePassword = await compare(password, user.password);
+    if (!validatePassword) {
       throw new AppError('Senha incorreta.');
     }
 

@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const dishesRoutes = Router();
+const dishesRouter = Router();
 
 const multer = require('multer');
 const uploadConfig = require('../configs/upload');
@@ -11,12 +11,12 @@ const dishesController = new DishesController();
 
 const ensureAuthenticated = require("../middlewares/ensureAuthenticated")
 
-dishesRoutes.use(ensureAuthenticated);
+dishesRouter.use(ensureAuthenticated);
 
-dishesRoutes.post('/', upload.single('image'), dishesController.create);
-dishesRoutes.put('/:id', upload.single('image'), dishesController.update);
-dishesRoutes.delete('/:id', dishesController.delete);
-dishesRoutes.get('/:id', dishesController.show);
-dishesRoutes.get('/', dishesController.showAll);
+dishesRouter.post('/', upload.single('image'), dishesController.create);
+dishesRouter.put('/:id', upload.single('image'), dishesController.update);
+dishesRouter.delete('/:id', dishesController.delete);
+dishesRouter.get('/:id', dishesController.show);
+dishesRouter.get('/', dishesController.showAll);
 
-module.exports = dishesRoutes;
+module.exports = dishesRouter;

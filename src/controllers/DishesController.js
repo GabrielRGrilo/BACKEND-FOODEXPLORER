@@ -3,14 +3,14 @@ const knex = require('../database/knex');
 const DiskStorage = require('../providers/DiskStorage');
 
 class DishesController {
-  async create(request, response) {
-    const user_id = request.user.id;
-    const { name, price, description, category, ingredients } = request.body;
-    const dishFilename = request.file.filename;
+  async create(req, res) {
+    const user_id = req.user.id;
+    const { name, price, description, category, ingredients } = req.body;
+    const dishFilename = req.file.filename;
     const diskStorage = new DiskStorage();
 
     if (!dishFilename) {
-      throw new AppError('Imagem é um campo obrigatório!');
+      throw new AppError('A imagem é um campo obrigatório!');
     }
 
     const filename = await diskStorage.save(dishFilename);
@@ -44,21 +44,21 @@ class DishesController {
       }
     }
 
-    return response.json('O prato foi criado com sucesso.');
+    return res.json('Prato criado com sucesso.');
   }
 
-  async update(request, response) {
-    const { id } = request.params;
-    const { name, price, description, category, ingredients } = request.body;
+  async update(req, res) {
+    const { id } = req.params;
+    const { name, price, description, category, ingredients } = req.body;
     const dishIngredients = JSON.parse(ingredients);
 
     const dish = await knex('dishes').where({ id }).first();
     if (!dish) {
-      throw new AppError('Prato não encontrado.');
+      throw new AppError('O prato não foi encontrado.');
     }
 
-    if (request.file) {
-      const dishFilename = request.file.filename;
+    if (req.file) {
+      const dishFilename = req.file.filename;
       const diskStorage = new DiskStorage();
 
       if (dishFilename) {
@@ -93,35 +93,35 @@ class DishesController {
 
     await knex('ingredients').insert(ingredientsInsert);
 
-    return response.json('As alterações foram salvas com sucesso.');
+    return res.json('As alterações foram salvar com sucesso.');
   }
 
-  async delete(request, response) {
-    const { id } = request.params;
+  async delete(req, res) {
+    const { id } = req.params;
 
     const dish = await knex('dishes').where({ id }).first();
     if (!dish) {
-      throw new AppError('Prato nao encontrado.');
+      throw new AppError('O prato não foi encontrado.');
     }
 
     await knex('dishes').where({ id }).delete();
 
-    return response.json('Prato excluído com sucesso.');
+    return res.json('O prato foi excluído com sucesso.');
   }
 
-  async show(request, response) {
-    const { id } = request.params;
+  async show(req, res) {
+    const { id } = req.params;
 
     const dish = await knex('dishes').where({ id }).first();
     if (!dish) {
-      throw new AppError('Prato não encontrado.');
+      throw new AppError('O prato não foi encontrado.');
     }
 
-    return response.json(dish);
+    return res.json(dish);
   }
 
-  async showAll(request, response) {
-    const { name } = request.query;
+  async showAll(req, res) {
+    const { name } = req.query;
     let dishes;
 
     if (name) {
@@ -143,7 +143,7 @@ class DishesController {
       dishes = await knex('dishes');
     }
 
-    return response.json(dishes);
+    return res.json(dishes);
   }
 }
 
