@@ -1,13 +1,13 @@
 const { Router } = require('express');
-const userRoutes = Router();
+const usersRouter = Router();
 
 const UsersController = require("../controllers/UsersController")
 const usersController = new UsersController();
 
 const ensureAuthenticated = require("../middlewares/ensureAuthenticated")
 
-userRoutes.post('/', usersController.create);
-userRoutes.put('/', ensureAuthenticated, usersController.update);
-userRoutes.delete('/', ensureAuthenticated, usersController.delete);
+usersRouter.post('/', usersController.create);
+usersRouter.put('/', ensureAuthenticated, usersController.update);
+usersRouter.delete('/', ensureAuthenticated, usersController.delete);
 
-module.exports = userRoutes;
+module.exports = usersRouter;

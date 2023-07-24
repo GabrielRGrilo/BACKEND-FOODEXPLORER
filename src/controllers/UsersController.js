@@ -1,6 +1,6 @@
 const AppError = require('../utils/AppError');
 const knex = require('../database/knex');
-const { hash, compare } = require('bcrypt');
+const { hash, compare } = require('bcryptjs');
 
 class UsersController {
   async create(req, res) {

@@ -10,8 +10,8 @@ const ingredientsRouter = require("./ingredients.routes")
 
 
 routes.use("/users", usersRouter);
-routes.use("/sessions", sessionsRouter);
 routes.use("/dishes", dishesRouter);
+routes.use("/sessions", sessionsRouter);
 routes.use("/ingredients", ingredientsRouter);
 
 
