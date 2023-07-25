@@ -14,6 +14,7 @@ class DishesController {
     }
 
     const filename = await diskStorage.save(dishFilename);
+  
 
     const [dishes_id] = await knex('dishes').where({ user_id }).insert({
       user_id,
@@ -65,6 +66,8 @@ class DishesController {
         await diskStorage.delete(dish.image);
         const filename = await diskStorage.save(dishFilename);
         dish.image = filename;
+
+        
       }
     }
 
