@@ -22,3 +22,4 @@ Para executar o projeto utilize o npm dev, ou npm start.
 
 
 Link do Deploy:
+https://food-explorerv2-rs.netlify.app
